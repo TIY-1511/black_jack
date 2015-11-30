@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'erb'
 
 require_relative('card')
 
@@ -29,10 +30,19 @@ cards_hash = response_hash['cards']
 # 	cards << Card.new(card_hash)
 # end
 
-cards = Card.generate(cards_hash)
+@cards = Card.generate(cards_hash)
 
 # cards = cards_hash.collect { |card_hash| Card.new(card_hash) } 
-cards.each { | card | puts "#{card}" }
+@cards.each { | card | puts "#{card}" }
 
 
 # puts "#{card_hash['value']} #{card_hash['suit']}"
+
+file_data = File.open("#{__dir__}/template.html.erb").read
+erb = ERB.new(file_data, 0, '>')
+
+result = erb.result(binding)
+
+File.open('./result.html', "w+") do |f|
+      f.write(result)
+ end

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<% @cards.each  do |card| %>
+		<p><strong><%= card.suit %></strong> - <%= card.value %></p>
+	<% end %>	
+</body>
+</html>

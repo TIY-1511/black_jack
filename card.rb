@@ -9,6 +9,8 @@ class Card
 	def initialize(data)
 		@value = data['value']
 		@suit = data['suit']
+		@image = data['images']['png']
+
 	end
 
 	def self.generate(data_list)
